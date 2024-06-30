@@ -7,7 +7,7 @@ xlsx      = Roo::Spreadsheet.open(file_path.to_s)
 sheet = xlsx.sheet(0) # Get first sheet
 
 success = 0
-failed = 0
+failed  = 0
 
 sheet.each(headers: true).with_index do |row, index|
   next if index.zero? # Skip header
