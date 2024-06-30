@@ -48,6 +48,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_154921) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "emissions", force: :cascade do |t|
+    t.bigint "summary_id", null: false
+    t.bigint "data_group_id"
+    t.string "gas"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_group_id"], name: "index_emissions_on_data_group_id"
+    t.index ["summary_id"], name: "index_emissions_on_summary_id"
+  end
+
   create_table "facilities", force: :cascade do |t|
     t.string "name"
     t.string "ghgrpid", null: false
@@ -58,42 +69,31 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_154921) do
     t.index ["ghgrpid"], name: "index_facilities_on_ghgrpid", unique: true
   end
 
-  create_table "facility_emissions", force: :cascade do |t|
-    t.bigint "facility_summary_id", null: false
-    t.bigint "data_group_id"
-    t.string "gas"
-    t.float "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["data_group_id"], name: "index_facility_emissions_on_data_group_id"
-    t.index ["facility_summary_id"], name: "index_facility_emissions_on_facility_summary_id"
-  end
-
-  create_table "facility_informations", force: :cascade do |t|
-    t.bigint "facility_summary_id", null: false
+  create_table "informations", force: :cascade do |t|
+    t.bigint "summary_id", null: false
     t.bigint "data_group_id"
     t.string "label"
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["data_group_id"], name: "index_facility_informations_on_data_group_id"
-    t.index ["facility_summary_id"], name: "index_facility_informations_on_facility_summary_id"
+    t.index ["data_group_id"], name: "index_informations_on_data_group_id"
+    t.index ["summary_id"], name: "index_informations_on_summary_id"
   end
 
-  create_table "facility_summaries", force: :cascade do |t|
+  create_table "summaries", force: :cascade do |t|
     t.bigint "facility_id", null: false
     t.integer "data_year"
     t.integer "total_gas_emissions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["facility_id"], name: "index_facility_summaries_on_facility_id"
+    t.index ["facility_id"], name: "index_summaries_on_facility_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "facility_emissions", "data_groups"
-  add_foreign_key "facility_emissions", "facility_summaries"
-  add_foreign_key "facility_informations", "data_groups"
-  add_foreign_key "facility_informations", "facility_summaries"
-  add_foreign_key "facility_summaries", "facilities"
+  add_foreign_key "emissions", "data_groups"
+  add_foreign_key "emissions", "summaries"
+  add_foreign_key "informations", "data_groups"
+  add_foreign_key "informations", "summaries"
+  add_foreign_key "summaries", "facilities"
 end
