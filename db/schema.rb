@@ -69,15 +69,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_154921) do
     t.index ["ghgrpid"], name: "index_facilities_on_ghgrpid", unique: true
   end
 
-  create_table "informations", force: :cascade do |t|
+  create_table "information_details", force: :cascade do |t|
     t.bigint "summary_id", null: false
     t.bigint "data_group_id"
     t.string "label"
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["data_group_id"], name: "index_informations_on_data_group_id"
-    t.index ["summary_id"], name: "index_informations_on_summary_id"
+    t.index ["data_group_id"], name: "index_information_details_on_data_group_id"
+    t.index ["summary_id"], name: "index_information_details_on_summary_id"
   end
 
   create_table "summaries", force: :cascade do |t|
@@ -93,7 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_154921) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "emissions", "data_groups"
   add_foreign_key "emissions", "summaries"
-  add_foreign_key "informations", "data_groups"
-  add_foreign_key "informations", "summaries"
+  add_foreign_key "information_details", "data_groups"
+  add_foreign_key "information_details", "summaries"
   add_foreign_key "summaries", "facilities"
 end
