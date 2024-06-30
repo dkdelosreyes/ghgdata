@@ -5,7 +5,6 @@ class CreateFacilities < ActiveRecord::Migration[7.0]
       t.string :ghgrpid, null: false
       t.float :latitude
       t.float :longitude
-      t.integer :naics_code
 
       t.timestamps
     end

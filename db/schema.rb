@@ -53,7 +53,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_154921) do
     t.string "ghgrpid", null: false
     t.float "latitude"
     t.float "longitude"
-    t.integer "naics_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ghgrpid"], name: "index_facilities_on_ghgrpid", unique: true
