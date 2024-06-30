@@ -51,6 +51,9 @@ gem "bootsnap", require: false
 # For processing spreadsheets
 gem "roo", "~> 2.10.0"
 
+# Pagination
+gem "kaminari"
+
 # Handling background jobs
 gem 'sidekiq'
 gem 'sidekiq-cron'
@@ -77,4 +80,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  gem 'rspec-rails', '~> 5.0'
+  gem 'faker'
+  gem "webmock"
 end
