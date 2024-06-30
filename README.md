@@ -36,7 +36,8 @@ The scraping of data is scheduled on every last day of August every year.
      Here's a [sample returned value](https://gist.github.com/dkdelosreyes/e3d3134fffee6af625df84a46388c751) of this endpoint.
 
 * Manually trigger the scheduled cron job
-  1. Run redis locally `redis-server`
+  1. Run redis and sidekiq locally on your local terminal. `redis-server` and `sidekiq`.
   2. Go to [http://localhost:3000/sidekiq/cron](http://localhost:3000/sidekiq/cron).
   3. Under `Cron Jobs`, click the `Enqueue Now` button of the cron job with a name of `ghg_facility_data_scraper_job`.
+  4. The job will take some time to finish due to a large dataset. You may terminate the job early after some few data populations.
 
