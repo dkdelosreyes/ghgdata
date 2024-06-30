@@ -1,0 +1,3 @@
+ghg_facility_data_scraper_job:
+  cron: "0 0 31 8 *" # Runs every year on August 31st at midnight
+  class: "GhgFacilityDataScraperJob"

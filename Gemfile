@@ -9,9 +9,8 @@ gem "rails", "~> 7.0.6"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-# Use sqlite3 as the database for Active Record
-# gem "sqlite3", "~> 1.4"
-gem 'pg'
+# Use Postgresql as the database for Active Record
+gem "pg", "~> 1.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -49,9 +48,20 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# For processing spreadsheets
+gem "roo", "~> 2.10.0"
+
+# Pagination
+gem "kaminari"
+
+# Handling background jobs
+gem 'sidekiq'
+gem 'sidekiq-cron'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
+  gem 'dotenv'
 end
 
 group :development do
@@ -70,4 +80,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  gem 'rspec-rails', '~> 5.0'
+  gem 'faker'
+  gem "webmock"
 end
