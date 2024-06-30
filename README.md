@@ -1,24 +1,43 @@
-# README
+# GHG Facility Details
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A sample rails app that scrapes facility and detailed information from [https://ghgdata.epa.gov/](https://ghgdata.epa.gov/).
+The scraping of data is scheduled on every last day of August every year.
 
-Things you may want to cover:
+* System dependencies: (Must have installed the ff. locally)
+  - Redis
+  - Postgresql
+  - RVM
+ 
+* Ruby requirements:
+  * Version used:
+    ```
+    ruby-3.0.2
+    ```
+    Install this version using RVM if not yet available on your local machine.
+    
+  * Gemset used:
+    ```
+    ghgdata
+    ```
+    Create thi gemset if not yet present using `rvm gemset create ghgdata`.
 
-* Ruby version
+* How to run this app on your local environment
+  1. Run `git clone git@github.com:dkdelosreyes/ghgdata.git`
+  2. Run `bundle install`
+  3. Go to the cloned app directory and copy the contents of `.env.example` to a new file `.env` then update the database credentials variables depending on your local configurations.
+  4. Start postgresql `brew services start postgresql`.
+  5. Initialize the database:
+     ```
+     rails db:create
+     rails db:migrate
+     rails db:seed
+     ```
+  6. Run `rails s` and access [http://localhost:3000/facilities_geo](http://localhost:3000/facilities_geo) on your browser.
+     Here's a [sample returned value](https://gist.github.com/dkdelosreyes/e3d3134fffee6af625df84a46388c751) of this endpoint.
 
-* System dependencies
+* Manually trigger the scheduled cron job
+  1. Run redis and sidekiq locally on your local terminal. `redis-server` and `sidekiq`.
+  2. Go to [http://localhost:3000/sidekiq/cron](http://localhost:3000/sidekiq/cron).
+  3. Under `Cron Jobs`, click the `Enqueue Now` button of the cron job with a name of `ghg_facility_data_scraper_job`.
+  4. The job will take some time to finish due to a large dataset. You may terminate the job early after some few data populations.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
